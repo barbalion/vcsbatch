@@ -1,0 +1,2 @@
+set source=HEAD
+c %*
