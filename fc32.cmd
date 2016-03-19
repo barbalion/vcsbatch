@@ -1,0 +1,1 @@
+@"%~dp0ThirdParty\beyond32.exe" %*
