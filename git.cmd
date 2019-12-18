@@ -1,15 +1,15 @@
 @echo off
 if defined GIT_HOME goto run
-if exist %ProgramFiles(x86)%/git/cmd/git.exe (
-  set GIT_HOME=%ProgramFiles(x86)%/git
+if exist "%ProgramFiles(x86)%\Git\cmd\git.exe" (
+  set "GIT_HOME=%ProgramFiles(x86)%\Git"
   goto run
 )
-if exist %ProgramFiles%\git\cmd\git.exe (
-  set GIT_HOME=%ProgramFiles%\git
+if exist "%ProgramFiles%\git\cmd\git.exe" (
+  set "GIT_HOME=%ProgramFiles%\Git"
   goto run
 )
-if exist %~dp0ThirdParty\git\cmd\git.exe (
-  set GIT_HOME=%~dp0ThirdParty\git
+if "exist %~dp0ThirdParty\git\cmd\git.exe" (
+  set "GIT_HOME=%~dp0ThirdParty\Git"
   goto run
 )
 echo GIT_HOME is undeffined. Unable to find git.

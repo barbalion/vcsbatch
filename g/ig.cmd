@@ -11,6 +11,7 @@ if "%1" == "" g h ig
 :loop
 if "%1" == "" goto :EOF
 
+if "%~nx1" == "" %0 "%~1\."
 echo Ignoring "%~nx1"...
 echo %~nx1>>%~dp1.gitignore
 shift   
