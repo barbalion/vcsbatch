@@ -18,7 +18,7 @@
 # under the License.
 
 # -----------------------------------------------------------------------------
-# Apache Maven Debug Script
+# Apache Maven YourKit Profiler Startup Script
 #
 # Environment Variable Prerequisites
 #
@@ -27,8 +27,9 @@
 #   MAVEN_SKIP_RC   (Optional) Flag to disable loading of mavenrc files.
 # -----------------------------------------------------------------------------
 
-MAVEN_DEBUG_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000"
+if [ ! -f "$YJPLIB" ]; then
+  echo "Error: Unable to autodetect the YJP library location. Please set YJPLIB variable" >&2
+  exit 1
+fi
 
-echo Preparing to execute Maven in debug mode
-
-env MAVEN_OPTS="$MAVEN_OPTS" MAVEN_DEBUG_OPTS="$MAVEN_DEBUG_OPTS" "`dirname "$0"`/mvn" "$@"
+env MAVEN_OPTS="-agentpath:$YJPLIB=onexit=snapshot,onexit=memory,tracing,onlylocal $MAVEN_OPTS" "`dirname "$0"`/mvn" "$@"
