@@ -1,18 +1,18 @@
-REM : Просмотр сделанных локальных изменений в Вeyond.
-REM : Синтаксис: "sd <files> | <number>"
-REM : Описание:
-REM :   Просмотр при помощи "Вeyond Compare" локальных изменений в файлах.
-REM :   Примеры:
-REM :     "s sd DOC/accounts.txt"
-REM :     "s sd 3"
+REM : GUI diff.
+REM : Syntax: "sd <files> | <number>"
+REM : Description:
+REM :   View you local changes with %%DIFF_TOOL%% (env variable) tool.
+REM :   Examples:
+REM :     "sd foo/bar.txt"
+REM :     "sd 3"
 REM :
 
-set BEYOND="%~dp0..\ThirdParty\beyond32.exe"
+if not defined DIFF_TOOL set DIFF_TOOL="%~dp0..\ThirdParty\WinMergeU.exe"
 :loop
 if "%~1" == "" goto end
 set afile=%~1
 set basefile=%~dp1.svn\text-base\%~nx1.svn-base
-%BEYOND% "%basefile:/=\%" "%afile:/=\%"
+%DIFF_TOOL% "%basefile:/=\%" "%afile:/=\%"
 shift
 goto loop
 

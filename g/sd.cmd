@@ -1,13 +1,13 @@
-REM : GUI diff by Beyond viewer.
+REM : GUI diff.
 REM : Syntax: "sd [-r revision] <files> | <number>"
 REM : Description:
-REM :   View you local changes with "Beyond Compare" tool.
+REM :   View you local changes with %%DIFF_TOOL%% (env variable) tool.
 REM :   Examples:
 REM :     "sd foo/bar.txt"
 REM :     "sd 3"
 REM :
 
-set BEYOND="%~dp0..\ThirdParty\beyond32.exe"
+if not defined DIFF_TOOL set DIFF_TOOL="%~dp0..\ThirdParty\WinMergeU.exe"
 set _REV=HEAD
 if defined source (
   echo Use source: %source%...
@@ -20,7 +20,7 @@ set tmpfile=%tmpfile:\=_%
 set tmpfile=%tmpfile:/=_%
 set tmpfile=%TEMP%\%tmpfile%.orig
 call %VCS_CMD% show "%_REV%:./%~1" > "%tmpfile%"
-%BEYOND% "%tmpfile%" %1
+%DIFF_TOOL% "%tmpfile%" %1
 shift
 goto loop
 
